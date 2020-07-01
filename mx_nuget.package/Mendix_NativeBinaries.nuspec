@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Mendix.LibGit2Sharp.NativeBinaries</id>
+    <version>0.101.0</version>
+    <authors>LibGit2Sharp contributors</authors>
+    <owners>Mendix</owners>
+    <licenseUrl>https://raw.githubusercontent.com/libgit2/libgit2/master/COPYING</licenseUrl>
+    <projectUrl>https://github.com/libgit2/libgit2sharp.nativebinaries</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/libgit2/libgit2sharp/master/square-logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Native binaries for LibGit2Sharp built by Mendix for Windows x64</description>
+  </metadata>
+  <files>
+    <file src="buildMultiTargeting/**/*.*" />
+
+    <file src="../nuget.package/build/LibGit2Sharp.NativeBinaries.props" target="build/Mendix.LibGit2Sharp.NativeBinaries.props" />
+    <file src="Mendix.LibGit2Sharp.NativeBinaries.props" target="build/net46" />
+
+    <file src="../nuget.package/libgit2/libgit2.license.txt" target="libgit2" />
+    <file src="../nuget.package/libgit2/libgit2_hash.txt" target="libgit2" />
+
+    <file src="runtimes/**/*.*" />
+    <file src="runtimes/**/*.*" />
+  </files>
+</package>
