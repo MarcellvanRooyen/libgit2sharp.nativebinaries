@@ -35,4 +35,5 @@ jobs:
       
     - name: Deploy Package
       # publish package to Github packages
-      run: powershell .\publishpackage_forMendix.ps1 -version 1.0.1-mx -githubToken ${{ secrets.GITHUB_TOKEN }}
+      run: curl -vX PUT -u "[user]:${{ secrets.GHPackagesToken }}" -F package=.\Mendix.LibGit2Sharp.NativeBinaries.1.0.1-mx.nupkg https://nuget.pkg.github.com/[user]/
+      shell:bash
