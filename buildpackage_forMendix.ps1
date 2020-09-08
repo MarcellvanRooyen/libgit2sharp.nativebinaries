@@ -1,3 +1,6 @@
-$version = "1.0.1-mx"
+Param(
+    [Parameter(Mandatory=$true)]
+    [string]$version
+)
 
 .\nuget.exe Pack nuget.package\MendixBinaries.nuspec -Version $version -NoPackageAnalysis

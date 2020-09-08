@@ -31,4 +31,8 @@ jobs:
 
     - name: Build Package
       # Package project into mendix package using powershell script
-      run: powershell .\buildpackage_forMendix.ps1
+      run: powershell .\buildpackage_forMendix.ps1 -version 1.0.1-mx
+      
+    - name: Deploy Package
+      # publish package to Github packages
+      run: powershell .\publishpackage_forMendix.ps1 -version 1.0.1-mx

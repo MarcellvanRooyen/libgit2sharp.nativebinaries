@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>LibGit2Sharp.NativeBinaries</id>
+    <id>Mendix.LibGit2Sharp.NativeBinaries</id>
     <version>1.0.1-mx</version>
     <authors>LibGit2Sharp contributors</authors>
     <owners>mendix</owners>
