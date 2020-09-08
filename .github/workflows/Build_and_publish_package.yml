@@ -40,12 +40,7 @@ jobs:
       # Package project into mendix package using powershell script
       run: powershell .\buildpackage_forMendix.ps1 -version 1.0.1-mx
       
-    - name: Config nuget Step 1
-      # publish package to Github packages
-      run: dotnet nuget remove source mendixGithub
-      shell: pwsh
-      
-    - name: Config nuget Step 2
+    - name: Config nuget Step
       # publish package to Github packages
       run: dotnet nuget add source https://nuget.pkg.github.com/MarcellvanRooyen/index.json --name mendixGithub --username MarcellvanRooyen --password ${{secrets.GHPACKAGESTOKEN}}
       shell: pwsh      
