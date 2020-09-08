@@ -17,9 +17,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Config Environment
-      # Download build artifacts using powershell script
-      run: powershell .\download.build.artifacts.and.package.ps1
+    - name: Config Environment step 1
+      # ensure that the libgit2 linkage is correct
+      run: git submodule init
+
+    - name: Config Environment step 2
+      # updates the libgi2 linkage to the latest
+      run: git submodule update
 
     - name: Build project
       # Build project using powershell script
