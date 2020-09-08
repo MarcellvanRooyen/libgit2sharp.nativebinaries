@@ -3,5 +3,5 @@ Param(
     [string]$version
 )
 
-.\nuget.exe push .\Mendix.LibGit2Sharp.NativeBinaries.%version%.nupkg" --source "github"
+.\nuget.exe push .\Mendix.LibGit2Sharp.NativeBinaries.$version.nupkg" --source "github"
 
