@@ -16,7 +16,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+    
+    - name: Setup .Net
+      uses: actions/setup-dotnet@v1
+      with:
+        source-url: https://nuget.pkh.github.com/MarcellvanRooyen/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    
     - name: Init git submodule
       # ensure that the libgit2 linkage is correct
       run: git submodule init
@@ -28,21 +35,11 @@ jobs:
     - name: Build project
       # Build project using powershell script
       run: powershell .\build.libgit2.ps1
-
+    
     - name: Build Package
       # Package project into mendix package using powershell script
-      run: powershell .\buildpackage_forMendix.ps1 -version 1.0.1-mx
-  package:
-    runs-on: windows-latest
-    needs: build    
-    steps:    
+      run: powershell .\buildpackage_forMendix.ps1 -version 1.0.1-mx    
     
-    - name: Config nuget Step
-      # publish package to Github packages
-      run: dotnet nuget add source https://nuget.pkg.github.com/MarcellvanRooyen/index.json --name mendixGithub --username MarcellvanRooyen --password ${{secrets.GHPACKAGESTOKEN}}
-      shell: pwsh      
-
     - name: Deploy Package 
       # publish package to Github packages
-      run: dotnet nuget push .\Mendix.LibGit2Sharp.NativeBinaries.1.0.1-mx.nupkg  --source mendixGithub --skip-duplicate --no-symbols true
-      shell: pwsh
+      run: dotnet nuget push .\Mendix.LibGit2Sharp.NativeBinaries.1.0.1-mx.nupkg --skip-duplicate --no-symbols true
