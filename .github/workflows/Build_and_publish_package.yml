@@ -1,0 +1,30 @@
+name: Build and Deploy Packages
+
+on: [push]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: RelWithDebInfo
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally
+    # well on Windows or Mac.  You can convert this to a matrix build if you need
+    # cross-platform coverage.
+    # See: https://docs.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow#configuring-a-build-matrix
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Config Environment
+      # Download build artifacts using powershell script
+      run: powershell .\download.build.artifacts.and.package.ps1
+
+    - name: Build project
+      # Build project using powershell script
+      run: powershell .\build.libgit2.ps1
+
+    - name: Build Package
+      # Package project into mendix package using powershell script
+      run: powershell .\buildpackage_forMendix.ps1
