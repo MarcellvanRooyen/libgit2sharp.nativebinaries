@@ -47,5 +47,5 @@ jobs:
       
     - name: Deploy Package 
       # publish package to Github packages
-      run: dotnet nuget push .\Mendix.LibGit2Sharp.NativeBinaries.1.0.1-mx.nupkg --skip-duplicate --no-symbols true
+      run: dotnet nuget push .\Mendix.LibGit2Sharp.NativeBinaries.1.0.1-mx.nupkg  --source mendixGithub --skip-duplicate --no-symbols true
       shell: pwsh
