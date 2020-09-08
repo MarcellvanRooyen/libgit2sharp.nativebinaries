@@ -17,14 +17,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Config Environment step 1
+    - name: Init git submodule
       # ensure that the libgit2 linkage is correct
       run: git submodule init
 
-    - name: Config Environment step 2
+    - name: Update git submodule
       # updates the libgi2 linkage to the latest
       run: git submodule update
-
+      
     - name: Build project
       # Build project using powershell script
       run: powershell .\build.libgit2.ps1
@@ -35,4 +35,4 @@ jobs:
       
     - name: Deploy Package
       # publish package to Github packages
-      run: powershell .\publishpackage_forMendix.ps1 -version 1.0.1-mx
+      run: powershell .\publishpackage_forMendix.ps1 -version 1.0.1-mx -gitToken ${{ secrets.GITHUB_TOKEN }}
