@@ -17,6 +17,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Setup .net
+    uses: actions/setup-dotnet@v2
+    with:
+        source-url: https://nuget.pkg.github.com/mendix/index.json
+    env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
     - name: Init git submodule
       # ensure that the libgit2 linkage is correct
       run: git submodule init
@@ -35,7 +42,4 @@ jobs:
       
     - name: Deploy Package
       # publish package to Github packages
-      run:| 
-        curl -vX PUT -u "[user]:${{ secrets.GHPackagesToken }}" -F package=.\Mendix.LibGit2Sharp.NativeBinaries.1.0.1-mx.nupkg https://nuget.pkg.github.com/[user]/
-      done
-      shell:bash
+      run: dotnet nuget push .\Mendix.LibGit2Sharp.NativeBinaries.1.0.1-mx.nupkg
