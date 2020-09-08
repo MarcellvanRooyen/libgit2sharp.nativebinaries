@@ -34,9 +34,8 @@ jobs:
       run: powershell .\buildpackage_forMendix.ps1 -version 1.0.1-mx
   package:
     runs-on: windows-latest
-    
-    steps:
-    - uses: actions/checkout@v2
+    needs: build    
+    steps:    
     
     - name: Config nuget Step
       # publish package to Github packages
