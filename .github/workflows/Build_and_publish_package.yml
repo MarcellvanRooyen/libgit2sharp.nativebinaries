@@ -22,7 +22,7 @@ jobs:
       with:
         source-url: https://nuget.pkg.github.com/MarcellvanRooyen/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        NUGET_AUTH_TOKEN: ${{secrets.GHPACKAGESTOKEN}}
 
     - name: Init git submodule
       # ensure that the libgit2 linkage is correct
@@ -40,10 +40,15 @@ jobs:
       # Package project into mendix package using powershell script
       run: powershell .\buildpackage_forMendix.ps1 -version 1.0.1-mx
       
-    - name: Config nuget
+    - name: Config nuget Step 1
       # publish package to Github packages
-      run: dotnet nuget add source https://nuget.pkg.github.com/MarcellvanRooyen/index.json --name mendixGithub --username MarcellvanRooyen --password ${{secrets.GITHUB_TOKEN}}
+      run: dotnet nuget add source https://nuget.pkg.github.com/MarcellvanRooyen/index.json --name mendixGithub --username MarcellvanRooyen --password ${{secrets.GHPACKAGESTOKEN}}
       shell: pwsh
+      
+    - name: Config nuget Step 2
+      # publish package to Github packages
+      run: dotnet nuget update source https://nuget.pkg.github.com/MarcellvanRooyen/index.json --name mendixGithub --username MarcellvanRooyen --password ${{secrets.GHPACKAGESTOKEN}}
+      shell: pwsh      
       
     - name: Deploy Package 
       # publish package to Github packages
