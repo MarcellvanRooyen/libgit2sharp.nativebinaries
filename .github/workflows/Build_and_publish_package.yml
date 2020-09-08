@@ -35,4 +35,4 @@ jobs:
       
     - name: Deploy Package
       # publish package to Github packages
-      run: powershell .\publishpackage_forMendix.ps1 -version 1.0.1-mx -gitToken ${{ secrets.GITHUB_TOKEN }}
+      run: powershell .\publishpackage_forMendix.ps1 -version 1.0.1-mx -githubToken ${{ secrets.GITHUB_TOKEN }}
