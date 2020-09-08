@@ -42,12 +42,12 @@ jobs:
       
     - name: Config nuget Step 1
       # publish package to Github packages
-      run: dotnet nuget add source https://nuget.pkg.github.com/MarcellvanRooyen/index.json --name mendixGithub --username MarcellvanRooyen --password ${{secrets.GHPACKAGESTOKEN}}
+      run: dotnet nuget remove source mendixGithub
       shell: pwsh
       
     - name: Config nuget Step 2
       # publish package to Github packages
-      run: dotnet nuget update source https://nuget.pkg.github.com/MarcellvanRooyen/index.json --name mendixGithub --username MarcellvanRooyen --password ${{secrets.GHPACKAGESTOKEN}}
+      run: dotnet nuget add source https://nuget.pkg.github.com/MarcellvanRooyen/index.json --name mendixGithub --username MarcellvanRooyen --password ${{secrets.GHPACKAGESTOKEN}}
       shell: pwsh      
       
     - name: Deploy Package 
