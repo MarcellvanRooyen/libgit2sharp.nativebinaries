@@ -40,6 +40,16 @@ jobs:
       # Package project into mendix package using powershell script
       run: powershell .\buildpackage_forMendix.ps1 -version 1.0.1-mx
       
+  push-packages:
+    name: 'Push package to Github'
+    needs:build
+    runs-on: windows-latest
+    - name: Config nuget
+      # publish package to Github packages
+      run: dotnet nuget add source https://nuget.pkg.github.com/MarcellvanRooyen/index.json --name GitHub --username MarcellvanRooyen --password ${{secrets.GITHUB_TOKEN}}
+      shell:pwsh
+      
     - name: Deploy Package
       # publish package to Github packages
-      run: dotnet nuget push .\Mendix.LibGit2Sharp.NativeBinaries.1.0.1-mx.nupkg
+      run: dotnet nuget push .\Mendix.LibGit2Sharp.NativeBinaries.1.0.1-mx.nupkg --source GitHub --skip-duplicate
+      shell:pwsh
