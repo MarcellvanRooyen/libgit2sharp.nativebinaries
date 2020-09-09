@@ -19,27 +19,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Setup .Net
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '3.1.x' # SDK Version to use.
-        source-url: https://nuget.pkg.github.com/MarcellvanRooyen/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GHPACKAGESTOKEN}}
-    
-    - name: Init git submodule
+    - name: Update git submodule
       # ensure that the libgit2 linkage is correct
       run: git submodule init
+           git submodule update
 
-    - name: Update git submodule
-      # updates the libgi2 linkage to the latest
-      run: git submodule update
-      
-    - name: Build project
+    - name: Build & Deploy Package
       # Build project using powershell script
       run: powershell .\build.libgit2.ps1
-      run: powershell .\buildpackage_forMendix.ps1 -version $PACKAGE_VER
-      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/MarcellvanRooyen/index.json" -UserName MarcellVanRooyen -Password ${{ secrets.GITHUB_TOKEN }}
-      run: nuget push **/*.nupkg -Source "GitHub" -SkipDuplicate
+           powershell .\buildpackage_forMendix.ps1 -version $PACKAGE_VER
+           nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/MarcellvanRooyen/index.json" -UserName MarcellVanRooyen -Password ${{ secrets.GITHUB_TOKEN }}
+           nuget push **/*.nupkg -Source "GitHub" -SkipDuplicate
     
      
