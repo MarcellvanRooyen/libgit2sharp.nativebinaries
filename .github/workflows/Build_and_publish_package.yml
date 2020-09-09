@@ -20,9 +20,10 @@ jobs:
     - name: Setup .Net
       uses: actions/setup-dotnet@v1
       with:
+        dotnet-version: '3.1.x' # SDK Version to use.
         source-url: https://nuget.pkg.github.com/MarcellvanRooyen/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        NUGET_AUTH_TOKEN: ${{secrets.GHPACKAGESTOKEN}}
     
     - name: Init git submodule
       # ensure that the libgit2 linkage is correct
