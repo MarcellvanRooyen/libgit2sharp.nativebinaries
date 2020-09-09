@@ -30,7 +30,7 @@ jobs:
       run: |
         powershell .\build.libgit2.ps1
         powershell .\buildpackage_forMendix.ps1 -version 1.0.1-mx
-        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/MarcellvanRooyen/index.json" -UserName MarcellVanRooyen -Password ${{ secrets.GITHUB_TOKEN }}
+        nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/MarcellvanRooyen/index.json" -UserName MarcellVanRooyen -Password ${{ secrets.GHPACKAGESTOKEN }}
         nuget push **/*.nupkg -Source "GitHub" -SkipDuplicate
     
      
